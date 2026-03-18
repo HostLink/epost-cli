@@ -1,16 +1,28 @@
 {
-  "name": "epost-cli",
+  "name": "@hostlink/epost-cli",
   "version": "1.0.0",
-  "description": "",
+  "description": "CLI tool for the e-POST email marketing platform",
   "main": "index.js",
   "bin": {
     "epost": "./index.js"
   },
+  "files": [
+    "index.js",
+    "src/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "epost",
+    "email",
+    "marketing",
+    "cli"
+  ],
+  "author": "HostLink",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
