@@ -5,7 +5,7 @@ A command-line interface for the [e-POST](https://app.e-post.com.hk) email marke
 ## Installation
 
 ```bash
-npm install -g .
+npm install -g @hostlink/epost-cli
 ```
 
 ## Authentication
