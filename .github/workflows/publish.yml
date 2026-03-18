@@ -25,10 +25,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Debug npm auth
+      - name: Get npm OIDC token
+        id: get-token
         run: |
-          npm config list
-          cat ~/.npmrc 2>/dev/null | grep -v _authToken || echo "no .npmrc"
+          TOKEN=$(curl -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=npm" | jq -r '.value')
+          echo "::add-mask::$TOKEN"
+          echo "token=$TOKEN" >> $GITHUB_OUTPUT
 
       - name: Publish to npm
         run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ steps.get-token.outputs.token }}
