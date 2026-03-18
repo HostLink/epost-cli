@@ -4,7 +4,7 @@
   "description": "CLI tool for the e-POST email marketing platform",
   "main": "index.js",
   "bin": {
-    "epost": "./index.js"
+    "epost": "index.js"
   },
   "files": [
     "index.js",
