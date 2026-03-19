@@ -8,6 +8,7 @@ const letters = require('./src/letters');
 const schedules = require('./src/schedules');
 const sms = require('./src/sms');
 const info = require('./src/info');
+const delivery = require('./src/delivery');
 
 const config = new Conf({ projectName: 'epost-cli' });
 
@@ -32,6 +33,7 @@ letters.register(program);
 schedules.register(program);
 sms.register(program);
 info.register(program);
+delivery.register(program);
 
 program.parse(process.argv);
 
