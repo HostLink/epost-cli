@@ -21,14 +21,17 @@ function register(program) {
   groups
     .command('list')
     .description('List all contact groups')
+    .option('-l, --limit <n>', 'Max number of groups to return', '50')
+    .option('-o, --offset <n>', 'Number of groups to skip', '0')
     .option('--json', 'Output as JSON')
     .action(async (options) => {
       const client = getClient();
+      const pagination = `limit: ${parseInt(options.limit)}, offset: ${parseInt(options.offset)}`;
       const query = gql`
         query {
           listContactGroup {
             meta { total }
-            data {
+            data(${pagination}) {
               contactgroup_id
               name
             }
