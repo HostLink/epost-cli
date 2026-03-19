@@ -69,3 +69,4 @@ epost contacts delete 101
 | `name` | String | Full name |
 | `email` | String | Email address |
 | `phone` | String | Phone number |
+| `contactgroup_id` | Int | Contact group ID |

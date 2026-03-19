@@ -39,6 +39,7 @@ function register(program) {
               email
               name
               phone
+              contactgroup_id
             }
           }
         }
@@ -52,7 +53,7 @@ function register(program) {
         } else if (list.length === 0) {
           console.log('No contacts found.');
         } else {
-          list.forEach(c => console.log(`[${c.contact_id}] ${c.name} | ${c.email} | ${c.phone}`));
+          list.forEach(c => console.log(`[${c.contact_id}] ${c.name} | ${c.email} | ${c.phone} | group:${c.contactgroup_id}`));
         }
       } catch (err) {
         const message = err?.response?.errors?.[0]?.message ?? err.message;
