@@ -30,6 +30,7 @@ function register(program) {
       const query = gql`
         query {
           listSMS {
+            meta { total }
             data(${pagination}) {
               sms_id
               phone
@@ -46,14 +47,16 @@ function register(program) {
       try {
         const data = await client.request(query);
         const list = data?.listSMS?.data ?? [];
+        const total = data?.listSMS?.meta?.total ?? list.length;
         if (options.json) {
-          console.log(JSON.stringify(list, null, 2));
+          console.log(JSON.stringify({ total, data: list }, null, 2));
         } else if (list.length === 0) {
           console.log('No SMS records found.');
         } else {
           list.forEach(s =>
             console.log(`[${s.sms_id}] ${s.phone} | ${s.content} | status: ${s.receive_status ?? 'N/A'} | created: ${s.created_time}`)
           );
+          console.log(`\nTotal: ${total}`);
         }
       } catch (err) {
         const message = err?.response?.errors?.[0]?.message ?? err.message;

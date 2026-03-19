@@ -30,6 +30,7 @@ function register(program) {
       const query = gql`
         query {
           listSchedule {
+            meta { total }
             data(${pagination}) {
               schedule_id
               letter_id
@@ -46,14 +47,16 @@ function register(program) {
       try {
         const data = await client.request(query);
         const list = data?.listSchedule?.data ?? [];
+        const total = data?.listSchedule?.meta?.total ?? list.length;
         if (options.json) {
-          console.log(JSON.stringify(list, null, 2));
+          console.log(JSON.stringify({ total, data: list }, null, 2));
         } else if (list.length === 0) {
           console.log('No schedules found.');
         } else {
           list.forEach(s =>
             console.log(`[${s.schedule_id}] letter:${s.letter_id} | ${s.time} | ${s.sender_name} <${s.sender_email}>`)
           );
+          console.log(`\nTotal: ${total}`);
         }
       } catch (err) {
         const message = err?.response?.errors?.[0]?.message ?? err.message;

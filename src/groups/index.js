@@ -27,6 +27,7 @@ function register(program) {
       const query = gql`
         query {
           listContactGroup {
+            meta { total }
             data {
               contactgroup_id
               name
@@ -37,12 +38,14 @@ function register(program) {
       try {
         const data = await client.request(query);
         const list = data?.listContactGroup?.data ?? [];
+        const total = data?.listContactGroup?.meta?.total ?? list.length;
         if (options.json) {
-          console.log(JSON.stringify(list, null, 2));
+          console.log(JSON.stringify({ total, data: list }, null, 2));
         } else if (list.length === 0) {
           console.log('No contact groups found.');
         } else {
           list.forEach(g => console.log(`[${g.contactgroup_id}] ${g.name}`));
+          console.log(`\nTotal: ${total}`);
         }
       } catch (err) {
         const message = err?.response?.errors?.[0]?.message ?? err.message;

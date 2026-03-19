@@ -30,6 +30,7 @@ function register(program) {
       const query = gql`
         query {
           listLetter {
+            meta { total }
             data(${pagination}) {
               letter_id
               subject
@@ -41,12 +42,14 @@ function register(program) {
       try {
         const data = await client.request(query);
         const list = data?.listLetter?.data ?? [];
+        const total = data?.listLetter?.meta?.total ?? list.length;
         if (options.json) {
-          console.log(JSON.stringify(list, null, 2));
+          console.log(JSON.stringify({ total, data: list }, null, 2));
         } else if (list.length === 0) {
           console.log('No letters found.');
         } else {
           list.forEach(l => console.log(`[${l.letter_id}] ${l.subject}`));
+          console.log(`\nTotal: ${total}`);
         }
       } catch (err) {
         const message = err?.response?.errors?.[0]?.message ?? err.message;
