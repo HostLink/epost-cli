@@ -25,6 +25,10 @@
   ],
   "author": "HostLink",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HostLink/epost-cli"
+  },
   "type": "commonjs",
   "dependencies": {
     "commander": "^14.0.3",
