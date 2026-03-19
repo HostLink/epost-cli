@@ -19,6 +19,50 @@ function register(program) {
   const sms = program.command('sms').description('Manage SMS');
 
   sms
+    .command('list')
+    .description('List sent SMS messages')
+    .option('-l, --limit <n>', 'Max number of results to return', '50')
+    .option('-o, --offset <n>', 'Number of results to skip', '0')
+    .option('--json', 'Output as JSON')
+    .action(async (options) => {
+      const client = getClient();
+      const pagination = `limit: ${parseInt(options.limit)}, offset: ${parseInt(options.offset)}`;
+      const query = gql`
+        query {
+          listSMS {
+            data(${pagination}) {
+              sms_id
+              phone
+              content
+              no_of_msg
+              created_time
+              receive_time
+              receive_status
+              report_time
+            }
+          }
+        }
+      `;
+      try {
+        const data = await client.request(query);
+        const list = data?.listSMS?.data ?? [];
+        if (options.json) {
+          console.log(JSON.stringify(list, null, 2));
+        } else if (list.length === 0) {
+          console.log('No SMS records found.');
+        } else {
+          list.forEach(s =>
+            console.log(`[${s.sms_id}] ${s.phone} | ${s.content} | status: ${s.receive_status ?? 'N/A'} | created: ${s.created_time}`)
+          );
+        }
+      } catch (err) {
+        const message = err?.response?.errors?.[0]?.message ?? err.message;
+        console.error(`Failed to fetch SMS list: ${message}`);
+        process.exit(1);
+      }
+    });
+
+  sms
     .command('send <phone>')
     .description('Send an SMS to a phone number')
     .requiredOption('-c, --content <content>', 'SMS content')

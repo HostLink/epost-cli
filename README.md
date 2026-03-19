@@ -109,6 +109,12 @@ epost schedules delete <id>
 Send SMS messages.
 
 ```bash
+# List SMS records (default limit: 50)
+epost sms list
+epost sms list --limit 10 --offset 0
+epost sms list --json
+
+# Send an SMS
 epost sms send <phone> --content "Your message here"
 ```
 
