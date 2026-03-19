@@ -25,6 +25,7 @@ epost contacts <command> [flags]
 | Command | Description |
 |---------|-------------|
 | `list` | List contacts (optionally filtered by group) |
+| `get <id>` | Get a contact by ID |
 | `add <name>` | Add a new contact to a group |
 | `delete <id>` | Delete a contact by ID |
 
@@ -42,6 +43,10 @@ epost contacts list --limit 20 --offset 40
 
 # List as JSON
 epost contacts list --json
+
+# Get a contact by ID
+epost contacts get 101
+epost contacts get 101 --json
 
 # Add a contact to a group
 epost contacts add "John Doe" --group 42 --email john@example.com --phone +85298765432

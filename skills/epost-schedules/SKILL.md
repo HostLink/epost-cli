@@ -25,6 +25,7 @@ epost schedules <command> [flags]
 | Command | Description |
 |---------|-------------|
 | `list` | List all schedules |
+| `get <id>` | Get a schedule by ID |
 | `add` | Create a new send schedule |
 | `update <id>` | Update an existing schedule |
 | `delete <id>` | Delete a schedule by ID |
@@ -37,6 +38,10 @@ epost schedules list
 
 # List with pagination
 epost schedules list --limit 10 --offset 0 --json
+
+# Get a schedule by ID
+epost schedules get 10
+epost schedules get 10 --json
 
 # Add a new schedule
 epost schedules add \

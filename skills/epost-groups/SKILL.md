@@ -25,6 +25,7 @@ epost groups <command> [flags]
 | Command | Description |
 |---------|-------------|
 | `list` | List all contact groups |
+| `get <id>` | Get a contact group by ID |
 | `add <name>` | Create a new contact group |
 | `delete <id>` | Delete a contact group by ID |
 
@@ -36,6 +37,10 @@ epost groups list
 
 # List as JSON
 epost groups list --json
+
+# Get a contact group by ID
+epost groups get 42
+epost groups get 42 --json
 
 # Add a new contact group
 epost groups add "VIP Customers"

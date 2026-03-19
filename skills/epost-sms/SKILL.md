@@ -25,6 +25,7 @@ epost sms <command> [flags]
 | Command | Description |
 |---------|-------------|
 | `list` | List sent SMS records |
+| `get <id>` | Get an SMS record by ID |
 | `send <phone>` | Send an SMS to a phone number |
 
 ## Usage Examples
@@ -38,6 +39,10 @@ epost sms list --limit 20 --offset 0
 
 # List as JSON
 epost sms list --json
+
+# Get an SMS record by ID
+epost sms get 99
+epost sms get 99 --json
 
 # Send an SMS
 epost sms send +85298765432 --content "Hello from e-post!"

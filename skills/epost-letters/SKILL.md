@@ -25,6 +25,7 @@ epost letters <command> [flags]
 | Command | Description |
 |---------|-------------|
 | `list` | List all letters |
+| `get <id>` | Get a letter by ID |
 | `add <subject>` | Create a new letter |
 | `update <id>` | Update an existing letter |
 | `delete <id>` | Delete a letter by ID |
@@ -40,6 +41,10 @@ epost letters list --limit 10 --offset 0
 
 # List as JSON
 epost letters list --json
+
+# Get a letter by ID
+epost letters get 5
+epost letters get 5 --json
 
 # Add a new letter
 epost letters add "Monthly Newsletter" --content "<h1>Hello!</h1>"
