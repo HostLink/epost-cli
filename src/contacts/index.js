@@ -63,6 +63,45 @@ function register(program) {
     });
 
   contacts
+    .command('get <id>')
+    .description('Get a contact by ID')
+    .option('--json', 'Output as JSON')
+    .action(async (id, options) => {
+      const client = getClient();
+      const query = gql`
+        query {
+          listContact(filters: { contact_id: ${parseInt(id)} }) {
+            data {
+              contact_id
+              email
+              name
+              phone
+              contactgroup_id
+            }
+          }
+        }
+      `;
+      try {
+        const data = await client.request(query);
+        const list = data?.listContact?.data ?? [];
+        if (list.length === 0) {
+          console.error(`Contact [${id}] not found.`);
+          process.exit(1);
+        }
+        const c = list[0];
+        if (options.json) {
+          console.log(JSON.stringify(c, null, 2));
+        } else {
+          console.log(`[${c.contact_id}] ${c.name} | ${c.email} | ${c.phone} | group:${c.contactgroup_id}`);
+        }
+      } catch (err) {
+        const message = err?.response?.errors?.[0]?.message ?? err.message;
+        console.error(`Failed to fetch contact: ${message}`);
+        process.exit(1);
+      }
+    });
+
+  contacts
     .command('add <name>')
     .description('Add a new contact')
     .requiredOption('-g, --group <id>', 'Contact group ID')
