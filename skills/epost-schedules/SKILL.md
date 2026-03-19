@@ -1,7 +1,7 @@
 ---
 name: epost-schedules
 version: 1.0.0
-description: "e-POST: Manage email send schedules."
+description: "e-post: Manage email send schedules."
 metadata:
   category: "email-marketing"
   requires:
@@ -11,7 +11,7 @@ metadata:
 
 # epost schedules
 
-Manage email send schedules in the e-POST email marketing platform.
+Manage email send schedules in the e-post email marketing platform.
 
 > **PREREQUISITE:** A valid access token must be set before use.
 > Run `epost set-token <your_token>` once to save your token.

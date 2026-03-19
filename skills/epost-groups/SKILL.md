@@ -1,7 +1,7 @@
 ---
 name: epost-groups
 version: 1.0.0
-description: "e-POST: Manage contact groups."
+description: "e-post: Manage contact groups."
 metadata:
   category: "email-marketing"
   requires:
@@ -11,7 +11,7 @@ metadata:
 
 # epost groups
 
-Manage contact groups in the e-POST email marketing platform.
+Manage contact groups in the e-post email marketing platform.
 
 > **PREREQUISITE:** A valid access token must be set before use.
 > Run `epost set-token <your_token>` once to save your token.

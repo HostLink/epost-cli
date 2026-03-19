@@ -1,7 +1,7 @@
 ---
 name: epost-letters
 version: 1.0.0
-description: "e-POST: Manage email letters (templates)."
+description: "e-post: Manage email letters (templates)."
 metadata:
   category: "email-marketing"
   requires:
@@ -11,7 +11,7 @@ metadata:
 
 # epost letters
 
-Manage email letters (templates) in the e-POST email marketing platform.
+Manage email letters (templates) in the e-post email marketing platform.
 
 > **PREREQUISITE:** A valid access token must be set before use.
 > Run `epost set-token <your_token>` once to save your token.

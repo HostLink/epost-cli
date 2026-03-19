@@ -1,7 +1,7 @@
 ---
 name: epost-contacts
 version: 1.0.0
-description: "e-POST: Manage contacts."
+description: "e-post: Manage contacts."
 metadata:
   category: "email-marketing"
   requires:
@@ -11,7 +11,7 @@ metadata:
 
 # epost contacts
 
-Manage contacts in the e-POST email marketing platform.
+Manage contacts in the e-post email marketing platform.
 
 > **PREREQUISITE:** A valid access token must be set before use.
 > Run `epost set-token <your_token>` once to save your token.

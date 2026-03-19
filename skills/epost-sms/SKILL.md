@@ -1,7 +1,7 @@
 ---
 name: epost-sms
 version: 1.0.0
-description: "e-POST: Send and list SMS messages."
+description: "e-post: Send and list SMS messages."
 metadata:
   category: "sms-marketing"
   requires:
@@ -11,7 +11,7 @@ metadata:
 
 # epost sms
 
-Send and manage SMS messages via the e-POST platform.
+Send and manage SMS messages via the e-post platform.
 
 > **PREREQUISITE:** A valid access token must be set before use.
 > Run `epost set-token <your_token>` once to save your token.
@@ -40,7 +40,7 @@ epost sms list --limit 20 --offset 0
 epost sms list --json
 
 # Send an SMS
-epost sms send +85298765432 --content "Hello from e-POST!"
+epost sms send +85298765432 --content "Hello from e-post!"
 
 # Send to a local HK number
 epost sms send 98765432 --content "Your verification code is 1234"

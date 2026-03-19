@@ -1,6 +1,6 @@
 # epost-cli
 
-A command-line interface for the [e-POST](https://app.e-post.com.hk) email marketing platform.
+A command-line interface for the [e-post](https://app.e-post.com.hk) email marketing platform.
 
 ## Installation
 
@@ -10,7 +10,7 @@ npm install -g @hostlink/epost-cli
 
 ## Authentication
 
-Obtain your access token from the e-POST platform and save it:
+Obtain your access token from the e-post platform and save it:
 
 ```bash
 epost set-token <your_access_token>
