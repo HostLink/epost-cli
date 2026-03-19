@@ -25,10 +25,15 @@ epost delivery <command> [flags]
 | Command | Description |
 |---------|-------------|
 | `list` | List delivery records for a schedule |
+| `get <id>` | Get a delivery record by ID |
 
 ## Usage Examples
 
 ```bash
+# Get a delivery record by ID
+epost delivery get 12345
+epost delivery get 12345 --json
+
 # List delivery records for a schedule
 epost delivery list --schedule 53700
 

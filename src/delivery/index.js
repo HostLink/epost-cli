@@ -67,6 +67,50 @@ function register(program) {
         process.exit(1);
       }
     });
+
+  delivery
+    .command('get <id>')
+    .description('Get a delivery record by ID')
+    .option('--json', 'Output as JSON')
+    .action(async (id, options) => {
+      const client = getClient();
+      const query = gql`
+        query {
+          listDelivery(filters: { delivery_id: ${parseInt(id)} }) {
+            data {
+              delivery_id
+              name
+              email
+              time
+              letter_id
+              viewed
+              view_ip
+              view_time
+              statusLabel
+              bounceCode
+            }
+          }
+        }
+      `;
+      try {
+        const data = await client.request(query);
+        const list = data?.listDelivery?.data ?? [];
+        if (list.length === 0) {
+          console.error(`Delivery [${id}] not found.`);
+          process.exit(1);
+        }
+        const d = list[0];
+        if (options.json) {
+          console.log(JSON.stringify(d, null, 2));
+        } else {
+          console.log(`[${d.delivery_id}] ${d.name} <${d.email}> | letter:${d.letter_id} | sent: ${d.time ?? 'N/A'} | ${d.statusLabel ?? 'N/A'} | viewed: ${d.viewed ? 'Yes' : 'No'}${d.view_time ? ` @ ${d.view_time}` : ''}${d.bounceCode ? ` | bounce: ${d.bounceCode}` : ''}`);
+        }
+      } catch (err) {
+        const message = err?.response?.errors?.[0]?.message ?? err.message;
+        console.error(`Failed to fetch delivery: ${message}`);
+        process.exit(1);
+      }
+    });
 }
 
 module.exports = { register };
