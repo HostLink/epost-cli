@@ -36,6 +36,8 @@ function register(program) {
               delivery_id
               name
               email
+              time
+              letter_id
               viewed
               view_ip
               view_time
@@ -55,7 +57,7 @@ function register(program) {
           console.log('No delivery records found.');
         } else {
           list.forEach(d =>
-            console.log(`[${d.delivery_id}] ${d.name} <${d.email}> | ${d.statusLabel ?? 'N/A'} | viewed: ${d.viewed ? 'Yes' : 'No'}${d.view_time ? ` @ ${d.view_time}` : ''}${d.bounceCode ? ` | bounce: ${d.bounceCode}` : ''}`)
+            console.log(`[${d.delivery_id}] ${d.name} <${d.email}> | letter:${d.letter_id} | sent: ${d.time ?? 'N/A'} | ${d.statusLabel ?? 'N/A'} | viewed: ${d.viewed ? 'Yes' : 'No'}${d.view_time ? ` @ ${d.view_time}` : ''}${d.bounceCode ? ` | bounce: ${d.bounceCode}` : ''}`)
           );
           console.log(`\nTotal: ${total}`);
         }

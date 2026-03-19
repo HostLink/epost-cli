@@ -55,6 +55,8 @@ epost delivery list --schedule 53700 --json
 | `delivery_id` | Int | Unique ID of the delivery record |
 | `name` | String | Recipient name |
 | `email` | String | Recipient email address |
+| `time` | String | Time the system sent the email |
+| `letter_id` | Int | ID of the letter that was sent |
 | `viewed` | Boolean | Whether the email was opened |
 | `view_ip` | String | IP address when email was opened |
 | `view_time` | String | Time the email was opened |
