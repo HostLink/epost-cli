@@ -1,6 +1,6 @@
 {
   "name": "@hostlink/epost-cli",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "CLI tool for the e-POST email marketing platform",
   "main": "index.js",
   "bin": {
