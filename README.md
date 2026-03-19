@@ -1,6 +1,11 @@
 # epost-cli
 
-A command-line interface for the [e-post](https://app.e-post.com.hk) email marketing platform.
+**CLI for the [e-post](https://app.e-post.com.hk) email & SMS marketing platform — built for humans and AI agents.**
+
+<p>
+  <a href="https://www.npmjs.com/package/@hostlink/epost-cli"><img src="https://img.shields.io/npm/v/@hostlink/epost-cli" alt="npm version"></a>
+  <a href="https://github.com/HostLink/epost-cli/blob/main/LICENSE"><img src="https://img.shields.io/github/license/HostLink/epost-cli" alt="license"></a>
+</p>
 
 ## Installation
 
@@ -16,7 +21,34 @@ Obtain your access token from the e-post platform and save it:
 epost set-token <your_access_token>
 ```
 
+## AI Agent Skills
+
+This repo ships Agent Skills (`SKILL.md` files) for every command — ready to use with GitHub Copilot, Cursor, and any MCP-compatible AI agent.
+
+```bash
+# Install all e-post skills at once
+npx skills add https://github.com/HostLink/epost-cli
+
+# Or pick only what you need
+npx skills add https://github.com/HostLink/epost-cli/tree/main/skills/epost-groups
+npx skills add https://github.com/HostLink/epost-cli/tree/main/skills/epost-contacts
+npx skills add https://github.com/HostLink/epost-cli/tree/main/skills/epost-letters
+npx skills add https://github.com/HostLink/epost-cli/tree/main/skills/epost-schedules
+npx skills add https://github.com/HostLink/epost-cli/tree/main/skills/epost-sms
+npx skills add https://github.com/HostLink/epost-cli/tree/main/skills/epost-delivery
+npx skills add https://github.com/HostLink/epost-cli/tree/main/skills/epost-info
+```
+
 ## Commands
+
+### Account Info
+
+Check your email and SMS quota and expiry dates.
+
+```bash
+epost info
+epost info --json
+```
 
 ### Groups
 
@@ -25,7 +57,10 @@ Manage contact groups.
 ```bash
 # List all contact groups
 epost groups list
-epost groups list --json
+epost groups list --limit 10 --offset 0 --json
+
+# Get a contact group by ID
+epost groups get <id>
 
 # Add a new contact group
 epost groups add "Group Name"
@@ -42,8 +77,10 @@ Manage contacts.
 # List contacts (default limit: 50)
 epost contacts list
 epost contacts list --group <group_id>
-epost contacts list --group <group_id> --limit 20 --offset 0
-epost contacts list --json
+epost contacts list --group <group_id> --limit 20 --offset 0 --json
+
+# Get a contact by ID
+epost contacts get <id>
 
 # Add a new contact
 epost contacts add "Name" --group <group_id>
@@ -60,14 +97,16 @@ Manage email letter templates.
 ```bash
 # List letters (default limit: 50)
 epost letters list
-epost letters list --limit 10 --offset 0
-epost letters list --json
+epost letters list --limit 10 --offset 0 --json
+
+# Get a letter by ID
+epost letters get <id>
 
 # Add a new letter
-epost letters add "Subject" --content "Email body content"
+epost letters add "Subject" --content "<h1>Email body</h1>"
 
 # Update a letter
-epost letters update <id> --subject "New Subject" --content "New content"
+epost letters update <id> --subject "New Subject" --content "<p>New content</p>"
 
 # Delete a letter
 epost letters delete <id>
@@ -75,13 +114,15 @@ epost letters delete <id>
 
 ### Schedules
 
-Manage send schedules.
+Manage email send schedules.
 
 ```bash
 # List schedules (default limit: 50)
 epost schedules list
-epost schedules list --limit 10 --offset 0
-epost schedules list --json
+epost schedules list --limit 10 --offset 0 --json
+
+# Get a schedule by ID
+epost schedules get <id>
 
 # Add a new schedule
 epost schedules add \
@@ -104,15 +145,30 @@ epost schedules update <id> --letter <letter_id> --date 2026-03-20 --time 10:00:
 epost schedules delete <id>
 ```
 
+### Delivery
+
+View email delivery records for a schedule.
+
+```bash
+# List delivery records for a schedule
+epost delivery list --schedule <schedule_id>
+epost delivery list --schedule <schedule_id> --limit 10 --offset 0 --json
+
+# Get a delivery record by ID
+epost delivery get <id>
+```
+
 ### SMS
 
-Send SMS messages.
+Send and manage SMS messages.
 
 ```bash
 # List SMS records (default limit: 50)
 epost sms list
-epost sms list --limit 10 --offset 0
-epost sms list --json
+epost sms list --limit 10 --offset 0 --json
+
+# Get an SMS record by ID
+epost sms get <id>
 
 # Send an SMS
 epost sms send <phone> --content "Your message here"
@@ -122,6 +178,6 @@ epost sms send <phone> --content "Your message here"
 
 | Option | Description |
 |--------|-------------|
-| `--json` | Output results as JSON (available on `list` commands) |
+| `--json` | Output results as JSON |
 | `--limit <n>` | Max number of results (default: 50) |
 | `--offset <n>` | Number of results to skip for pagination (default: 0) |
