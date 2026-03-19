@@ -62,6 +62,48 @@ function register(program) {
       }
     });
   schedules
+    .command('get <id>')
+    .description('Get a schedule by ID')
+    .option('--json', 'Output as JSON')
+    .action(async (id, options) => {
+      const client = getClient();
+      const query = gql`
+        query {
+          listSchedule(filters: { schedule_id: ${parseInt(id)} }) {
+            data {
+              schedule_id
+              letter_id
+              date
+              time
+              sender_name
+              sender_email
+              reply_to_name
+              reply_to
+            }
+          }
+        }
+      `;
+      try {
+        const data = await client.request(query);
+        const list = data?.listSchedule?.data ?? [];
+        if (list.length === 0) {
+          console.error(`Schedule [${id}] not found.`);
+          process.exit(1);
+        }
+        const s = list[0];
+        if (options.json) {
+          console.log(JSON.stringify(s, null, 2));
+        } else {
+          console.log(`[${s.schedule_id}] letter:${s.letter_id} | ${s.date} ${s.time} | ${s.sender_name} <${s.sender_email}>`);
+        }
+      } catch (err) {
+        const message = err?.response?.errors?.[0]?.message ?? err.message;
+        console.error(`Failed to fetch schedule: ${message}`);
+        process.exit(1);
+      }
+    });
+
+  schedules
     .command('add')
     .description('Add a new schedule')
     .requiredOption('--letter <id>', 'Letter ID')

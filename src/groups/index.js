@@ -52,6 +52,42 @@ function register(program) {
     });
 
   groups
+    .command('get <id>')
+    .description('Get a contact group by ID')
+    .option('--json', 'Output as JSON')
+    .action(async (id, options) => {
+      const client = getClient();
+      const query = gql`
+        query {
+          listContactGroup(filters: { contactgroup_id: ${parseInt(id)} }) {
+            data {
+              contactgroup_id
+              name
+            }
+          }
+        }
+      `;
+      try {
+        const data = await client.request(query);
+        const list = data?.listContactGroup?.data ?? [];
+        if (list.length === 0) {
+          console.error(`Contact group [${id}] not found.`);
+          process.exit(1);
+        }
+        const g = list[0];
+        if (options.json) {
+          console.log(JSON.stringify(g, null, 2));
+        } else {
+          console.log(`[${g.contactgroup_id}] ${g.name}`);
+        }
+      } catch (err) {
+        const message = err?.response?.errors?.[0]?.message ?? err.message;
+        console.error(`Failed to fetch contact group: ${message}`);
+        process.exit(1);
+      }
+    });
+
+  groups
     .command('add <name>')
     .description('Add a new contact group')
     .action(async (name) => {

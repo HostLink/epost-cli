@@ -56,6 +56,43 @@ function register(program) {
     });
 
   letters
+    .command('get <id>')
+    .description('Get a letter by ID')
+    .option('--json', 'Output as JSON')
+    .action(async (id, options) => {
+      const client = getClient();
+      const query = gql`
+        query {
+          listLetter(filters: { letter_id: ${parseInt(id)} }) {
+            data {
+              letter_id
+              subject
+              content
+            }
+          }
+        }
+      `;
+      try {
+        const data = await client.request(query);
+        const list = data?.listLetter?.data ?? [];
+        if (list.length === 0) {
+          console.error(`Letter [${id}] not found.`);
+          process.exit(1);
+        }
+        const l = list[0];
+        if (options.json) {
+          console.log(JSON.stringify(l, null, 2));
+        } else {
+          console.log(`[${l.letter_id}] ${l.subject}\n${l.content}`);
+        }
+      } catch (err) {
+        const message = err?.response?.errors?.[0]?.message ?? err.message;
+        console.error(`Failed to fetch letter: ${message}`);
+        process.exit(1);
+      }
+    });
+
+  letters
     .command('add <subject>')
     .description('Add a new letter')
     .requiredOption('-c, --content <content>', 'Letter content')
