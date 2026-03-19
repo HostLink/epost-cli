@@ -6,6 +6,7 @@ const groups = require('./src/groups');
 const contacts = require('./src/contacts');
 const letters = require('./src/letters');
 const schedules = require('./src/schedules');
+const sms = require('./src/sms');
 
 const config = new Conf({ projectName: 'epost-cli' });
 
@@ -28,6 +29,7 @@ groups.register(program);
 contacts.register(program);
 letters.register(program);
 schedules.register(program);
+sms.register(program);
 
 program.parse(process.argv);
 

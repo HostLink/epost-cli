@@ -104,6 +104,14 @@ epost schedules update <id> --letter <letter_id> --date 2026-03-20 --time 10:00:
 epost schedules delete <id>
 ```
 
+### SMS
+
+Send SMS messages.
+
+```bash
+epost sms send <phone> --content "Your message here"
+```
+
 ## Options
 
 | Option | Description |
