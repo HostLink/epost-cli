@@ -1,11 +1,23 @@
 # epost-cli
 
-**CLI for the [e-post](https://app.e-post.com.hk) email & SMS marketing platform — built for humans and AI agents.**
+**CLI for the [e-post](https://www.e-post.com.hk) email & SMS marketing platform — built for humans and AI agents.**
 
 <p>
   <a href="https://www.npmjs.com/package/@hostlink/epost-cli"><img src="https://img.shields.io/npm/v/@hostlink/epost-cli" alt="npm version"></a>
   <a href="https://github.com/HostLink/epost-cli/blob/main/LICENSE"><img src="https://img.shields.io/github/license/HostLink/epost-cli" alt="license"></a>
 </p>
+
+## About e-post
+
+[e-post](https://www.e-post.com.hk) is a Hong Kong-based email and SMS marketing platform that helps businesses reach their customers. It provides:
+
+- 📧 **Email marketing** — import contacts, design email templates, schedule and send bulk EDM campaigns
+- 📱 **SMS marketing** — send bulk SMS messages to contact groups
+- 📊 **Delivery tracking** — monitor open rates, bounce codes, delivery status and view times for every campaign
+- 👥 **Contact management** — organise contacts into groups, import/export mailing lists
+- 💳 **Flexible quota plans** — purchase email and SMS sending quotas with expiry dates to suit your needs
+
+This CLI provides programmatic access to the e-post platform API at [app.e-post.com.hk](https://app.e-post.com.hk), making it easy to automate campaigns, integrate with CI/CD pipelines, or use with AI agents.
 
 ## Installation
 
