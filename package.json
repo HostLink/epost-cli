@@ -24,7 +24,7 @@
     "cli"
   ],
   "author": "HostLink",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/HostLink/epost-cli"
